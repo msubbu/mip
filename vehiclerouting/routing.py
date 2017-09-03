@@ -50,6 +50,8 @@ def get_routes(input_data):
     for i in customers:
         u[i.index-1] = model.addVar(lb = i.demand, ub = vehicle_capacity)
 
+    model.update()
+
     #enter a customer location exactly once
     for j in customers:
         model.addConstr(quicksum(x[i,j.index] for i in sites if i != j.index) == 1)
