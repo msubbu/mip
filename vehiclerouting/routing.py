@@ -2,7 +2,7 @@ from __future__ import print_function
 
 __author__ = 'Madhu'
 
-#core model adopted from Gurobi's Tanker routing problem here - http://examples.gurobi.com/routing-tanker-trucks/
+#core model adapted from Gurobi's Tanker routing problem here - http://examples.gurobi.com/routing-tanker-trucks/
 
 import math
 from collections import namedtuple
