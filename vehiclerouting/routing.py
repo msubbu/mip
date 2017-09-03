@@ -15,7 +15,7 @@ Customer = namedtuple("Customer", ['index', 'demand', 'x', 'y'])
 def dist(c1, c2):
     return math.sqrt((c1.x - c2.x)**2 + (c1.y - c2.y)**2)
 
-def get_routes(input_data):
+def get_routes(input_data, tol):
 
     lines = input_data.split('\n')
     parts = lines[0].split()
@@ -70,7 +70,7 @@ def get_routes(input_data):
             if i != j:
                 model.addConstr(u[i.index -1] - u[j.index - 1] + vehicle_capacity * x[i.index,j.index] <= vehicle_capacity - j.demand)
 
-    model.setParam(GRB.param.MIPGap,0.05)
+    model.setParam(GRB.param.MIPGap,tol)
 
     model.update()
 
@@ -111,7 +111,7 @@ if __name__ == '__main__':
         file_location = sys.argv[1].strip()
         with open(file_location, 'r') as input_data_file:
             input_data = input_data_file.read()
-        res = get_routes(input_data)
+        res = get_routes(input_data,float(sys.argv[2].strip()))
         print(res)
 
         with open(file_location+".sol","w") as res_file:
