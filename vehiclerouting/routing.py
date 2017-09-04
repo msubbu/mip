@@ -52,6 +52,9 @@ def get_routes(input_data, tol):
 
     model.update()
 
+    #not more than vehicle_count outgoing edges from depot
+    model.addConstr(quicksum(x[depot.index,j.index] for j in customers) <= vehicle_count)
+
     #enter a customer location exactly once
     for j in customers:
         model.addConstr(quicksum(x[i,j.index] for i in sites if i != j.index) == 1)
